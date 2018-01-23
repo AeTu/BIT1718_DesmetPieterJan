@@ -1,0 +1,45 @@
+select gene_name , (seq_region_end - seq_region_start -1) as length from gene order by length asc limit 1;
+| gene_name | length |
++-----------+--------+
+| TRDD1     |      6 |
+
+
+
+select gene_name, count(*) from transcript JOIN gene ON transcript.gene_id = gene.gene_id group by gene_name order by count(*) desc limit 1;
++-----------+----------+
+| gene_name | count(*) |
++-----------+----------+
+| U6        |     1329 |
++-----------+----------+
+
+
+select chromosome from gene  where gene.description rlike("cancer") group by chromosome order by count(gene.gene_id) DESC limit 1 offset 1;   
++------------+
+| chromosome |
++------------+
+| 9          |
++------------+
+select count(exon.exon_id) from gene JOIN transcript ON transcript.gene_id = gene.gene_id JOIN exon_transcript ON transcript.transcript_id = exon_transcript.transcript_id JOIN exon ON exon_transcript.exon_id = exon.exon_id  where chromosome=9;
++---------------------+
+| count(exon.exon_id) |
++---------------------+
+|               45679 |
++---------------------+
+
+
+
+mysql> select count(*) from exon;
++----------+
+| count(*) |
++----------+
+|   642590 |
++----------+
+mysql> select count(*) from exon_transcript;
++----------+
+| count(*) |
++----------+
+|  1178393 |
++----------+
+Omdat er meerdere transcripten zijn per exon in de exon_transcript tabel hierdoor zal het aantal verschillen van elkaar
+
+
