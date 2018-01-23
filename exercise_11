@@ -1,0 +1,44 @@
+db.bioinf_mongo_examen.find({$or:[{"method_of_admission":"TABLET, DISPERSIBLE;ORAL"},{"method_of_admission":  "SPRAY, METERD;SUBLINGUAL"}]}).count({"method_of_admission":1})
+18
+
+db.bioinf_mongo_examen.find({"percentage_of_side_effects":{$gt:12}}).count();
+12
+
+db.bioinf_mongo_examen.find({"percentage_of_side_effects":{$gt:12}},{"company":1, _id:0}).sort({"percentage_of_side_effects":-1});
+{ "company" : "AbbVie Inc." }
+{ "company" : "AkPharma Inc" }
+{ "company" : "AbbVie Inc." }
+{ "company" : "AbbVie Inc." }
+{ "company" : "AbbVie Inc." }
+{ "company" : "AbbVie Inc." }
+{ "company" : "Durata Therapeutics, Inc." }
+{ "company" : "Durata Therapeutics, Inc." }
+{ "company" : "Durata Therapeutics, Inc." }
+{ "company" : "AbbVie Inc." }
+{ "company" : "Alliance Pharma plc" }
+{ "company" : "Watson Pharmaceuticals, Inc." }
+
+
+> db.bioinf_mongo_examen.aggregate({$group:{_id:"$company",sum:{$sum:1}, min:{$min:"$percentage_of_side_effects"}, max:{$max:"$percentage_of_side_effects"}}},{$match:{sum:{$gt:1}}});
+{ "_id" : "West-Ward Pharmaceuticals", "sum" : 2, "min" : 5.6, "max" : 6.5 }
+{ "_id" : "ViiV Healthcare", "sum" : 4, "min" : 5.8, "max" : 10.2 }
+{ "_id" : "Vertical Pharmaceuticals, LLC", "sum" : 2, "min" : 7, "max" : 9.5 }
+{ "_id" : "Upsher-Smith Laboratories Inc.", "sum" : 3, "min" : 6, "max" : 11.5 }
+{ "_id" : "URL Pharma, Inc.", "sum" : 3, "min" : 7.5, "max" : 9 }
+{ "_id" : "Turing Pharmaceuticals LLC", "sum" : 5, "min" : 5.7, "max" : 9 }
+{ "_id" : "Torrent Pharmaceuticals Limited", "sum" : 5, "min" : 5.2, "max" : 8.5 }
+{ "_id" : "Teva Pharmaceuticals USA, Inc.", "sum" : 3, "min" : 5.2, "max" : 8.5 }
+{ "_id" : "Tesaro Inc.", "sum" : 3, "min" : 4.5, "max" : 8.1 }
+{ "_id" : "Takeda Pharmaceuticals U.S.A., Inc.", "sum" : 3, "min" : 7, "max" : 9 }
+{ "_id" : "Synthon Pharmaceuticals Inc.", "sum" : 2, "min" : 7, "max" : 8 }
+{ "_id" : "Spear Pharmaceuticals", "sum" : 2, "min" : 8.5, "max" : 8.5 }
+{ "_id" : "Sirion Therapeutics, Inc.", "sum" : 4, "min" : 5, "max" : 8.2 }
+{ "_id" : "Silvergate Pharmaceuticals, Inc.", "sum" : 2, "min" : 7.4, "max" : 8 }
+{ "_id" : "Roche", "sum" : 4, "min" : 5.2, "max" : 7.1 }
+{ "_id" : "Xanodyne Pharmaceuticals, Inc", "sum" : 4, "min" : 7, "max" : 10 }
+{ "_id" : "UCB, Inc.", "sum" : 4, "min" : 5.5, "max" : 9 }
+{ "_id" : "Qualitest Pharmaceuticals", "sum" : 2, "min" : 6, "max" : 8.5 }
+{ "_id" : "Procter & Gamble", "sum" : 2, "min" : 6, "max" : 6.4 }
+{ "_id" : "Pozen Inc.", "sum" : 3, "min" : 6, "max" : 6 }
+Type "it" for more
+
