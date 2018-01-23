@@ -1,0 +1,12 @@
+/
+
+vraag 2 :
+eerste stap:
+curl 'http://rest.ensembl.org/xrefs/symbol/mouse/Notch1?' -H 'Content-type:application/json'
+ 
+als resultaat krijg je:
+{"type":"gene","id":"ENSMUSG00000026923"}]
+
+vervolgens:
+curl 'http://rest.ensembl.org/sequence/id/ENSMUSG00000026923?' -H 'Content-type:text/plain'
+
