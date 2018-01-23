@@ -1,0 +1,16 @@
+UNF:  DATA wordt verzameld
+research: personelNo , Name , Date_of_birth, lab_code, labname, (research code, research description, research super)
+
+1NF: De repeating group worden in nieuw tabel gezet en primary keys(*) worden gekozen
+Lab: lab_code(*), personelNo(*), name , Date_of_birth, labname
+research:research code(*), research super(*), personelNo(*) , research description
+
+2NF: Elke niet sleutel moet volledig afhankelijk zijn van de key's
+Lab: lab_code(*), personelNo(*),labname
+Researcher: personelNo(*), name , Date_of_birth
+research: research code(*), research super(*), personelNo(*) , research description
+
+3NF: de nietsleutel elementen mogen enkel van de sleutel afhangen en niet van elkaar
+Lab: lab_code(*), personelNo(*),labname
+Researcher: personelNo(*), name , Date_of_birth
+research: research code(*), research super(*), personelNo(*) , research description
